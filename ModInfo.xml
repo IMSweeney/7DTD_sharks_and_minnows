@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<xml>
+	<ModInfo>
+		<Name value="SharksAndMinnows" />
+		<Description value="sharks and minnows game?" />
+		<Author value="imsweene" />
+		<Version value="0.0.2" />
+	</ModInfo>
+</xml>

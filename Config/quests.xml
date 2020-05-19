@@ -1,0 +1,6 @@
+<SharksAndMinnows>
+	<append xpath="/quests">
+	   	<quest id="closing_circle">
+	   	</quest>
+	</append>
+</SharksAndMinnows>

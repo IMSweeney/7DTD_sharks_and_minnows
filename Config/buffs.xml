@@ -1,0 +1,50 @@
+<SharksAndMinnows>
+	<append xpath="/buffs">
+	    <buff name="shark" icon="ui_game_symbol_coffee">
+	    	<display_value value="circleX"/>
+	    	
+	    	<!-- Setup the circle -->
+			<effect_group>
+				<triggered_effect trigger="onSelfBuffStart" action="ModifyCVar" target="self" cvar="circleX" operation="set" value="randomint(0,2048)"/>
+				<triggered_effect trigger="onSelfBuffStart" action="ModifyCVar" target="self" cvar="circleY" operation="set" value="randomint(-2048,2048)"/>
+ 			</effect_group>
+
+	    	<!-- Give sharks the coffee effect indefinitely -->
+	        <effect_group>
+	        	<triggered_effect trigger="onSelfBuffStart" action="RemoveBuff" buff="minnow"/>
+				<triggered_effect trigger="onSelfBuffStart" action="RemoveBuff" buff="buffBlackStrapCoffee"/>
+				<passive_effect name="StaminaChangeOT" operation="perc_add" value="0.25">
+					<requirement name="NotHasBuff" buff="buffHealWaterMax"/>
+				</passive_effect>
+				<passive_effect name="StaminaChangeOT" operation="perc_add" value="0.1">
+					<requirement name="HasBuff" buff="buffHealWaterMax"/>
+				</passive_effect>
+				<passive_effect name="HypothermalResist" operation="base_add" value="5"/>
+			</effect_group>
+
+			<!-- Sharks create more sharks -->
+			<effect_group>
+				<triggered_effect trigger="onSelfKilledOther" action="addBuff" target="other" buff="shark" tags="player"/>
+			</effect_group>
+	    </buff>
+	</append>
+
+	<append xpath="/buffs">
+	 	<buff name="minnow" icon="ui_game_symbol_map_cursor">
+	 		<display_value value="circleX"/>
+	    	<!-- Intended to increase kill xp minnows get for killing sharks -->
+	    	<effect_group>
+	    		<triggered_effect trigger="onSelfKilledOther" action="GiveExp" exp="1000" target="self"/>
+	    	</effect_group>
+	    </buff>
+	</append>
+
+	<append xpath="/buffs">
+	 	<buff name="logger" icon="ui_game_symbol_map_cursor">
+	 		<update_rate value="1"/>
+	 		<effect_group>
+	 			<triggered_effect trigger="onSelfBuffUpdate" action="CVarLogValue" target="self" cvar="circleX"/>
+	 		</effect_group>
+	    </buff>
+	</append>
+</SharksAndMinnows>
